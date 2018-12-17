@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Confluent Graphs </title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    </style>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <script src="/lib/jquery-1.10.2.min.js"></script>
+    <script src="/lib/d3.v3.js"></script>
+    <script src="/lib/cola.v4.js"></script>
+</head>
+
+<body>
+    <h1 style="text-align: center; color:black;"> Confluent Graph for Moscow Tube</h1>
+    <div style="width:1000px; margin:0 auto;">
+        <p>This is the implementation of the paper
+            <a href="http://aviz.fr/~bbach/confluentgraphs/Bach2016confluentgraphs.pdf" target="_blank">"Towards Unambiguous Edge Bundling: Investigating Confluent Drawings for Network Visualization".</a>
+        </p>
+    </div>
+    <div style="width:1600px; margin:0 auto;">
+        <p>
+            <figure style="text-align: center">
+                <svg width="800" height="800" id="node-link-graph"></svg>
+                <figcaption>Original Graph</figcaption>
+            </figure>
+            <figure>
+                <!-- ConfluentDrawing -->
+                <svg width="800" height="800" id="ConfDrawing"></svg>
+                <figcaption>Confluent Graph</figcaption>
+            </figure>
+            
+        </p>
+    </div>
+    <br \>
+    <br \>
+    <br \>
+    <br \>
+
+
+    <!-- Load our JS -->
+
+    <!-- JS for Power Graph Layout -->
+    <script src="/js/genPGlayout.js"></script>
+    <script>
+        // PG decomposition
+        getPGlayout("/data/MoscowTube.json", {});
+    </script>
+
+    <!-- Load our JS -->
+    <script src="/js/graphUtils.js"></script>
+
+    <!-- JS for confluent drawings -->
+    <script src="/js/drawGraph.js"></script>
+    <script src="/js/genConfGraph.js"></script>
+    <script src="/js/drawConfGraph.js"></script>
+
+    <script>
+        // Wait for PG decomposition
+        setTimeout(() => {
+
+            // Replace d3.v3 with d3.v4 (Compatibility Issues)
+            var script = document.createElement('script');
+            script.src = "/lib/d3.v4.min.js";
+            var head = document.getElementsByTagName('head')[0];
+
+            setTimeout(() => {
+                head.removeChild(head.childNodes[head.childNodes.length - 1]);
+                head.removeChild(head.childNodes[head.childNodes.length - 1]);
+                head.removeChild(head.childNodes[head.childNodes.length - 1]);
+                head.removeChild(head.childNodes[head.childNodes.length - 1]);
+                setTimeout(() => {
+                    head.appendChild(script);
+
+                    setTimeout(() => {
+
+                        var dataCopy1 = $.extend(true, {}, moduleData);
+                        var dataCopy2 = $.extend(true, {}, moduleData);
+                        
+                        drawNodeLink(dataCopy1);
+                        genConfluentDrawing(dataCopy2);
+                    }, 500);
+
+                }, 1000);
+
+            }, 500);
+
+        }, 1500);
+    </script>
+
+</body>
+
+</html>
