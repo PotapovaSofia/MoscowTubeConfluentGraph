@@ -4,7 +4,7 @@ This is an implementation of the paper "Towards Unambiguous Edge Bundling: Inves
 
 To run
 
-    $ cd ConfluentGraphImpl
+    $ cd MoscowTubeConfluentGraph
     $ npm install
     $ npm start
 
